@@ -10,14 +10,15 @@ CREATE TABLE `boss` (
   `certificate` varchar(50) NOT NULL DEFAULT '0' COMMENT '学历',
   # 公司情况
   `company_name` varchar(50) NOT NULL DEFAULT '0' COMMENT '公司名字',
-  `company_href` varchar(50) NOT NULL DEFAULT '0' COMMENT '公司链接',
+  `company_href` varchar(255) NOT NULL DEFAULT '0' COMMENT '公司链接',
   `trade` varchar(50) NOT NULL DEFAULT '0' COMMENT '行业',
-  `round` varchar(50) NOT NULL DEFAULT '0' COMMENT '轮次',
+  `company_round` varchar(50) NOT NULL DEFAULT '0' COMMENT '轮次',
   `scale` varchar(50) NOT NULL DEFAULT '0' COMMENT '规模',
   # 发布情况
   `publish_name` varchar(50) NOT NULL DEFAULT '0' COMMENT '发布人昵称',
+  `publish_href` varchar(255) NOT NULL DEFAULT '0' COMMENT '发布人头像',
   `publish_position` varchar(50) NOT NULL DEFAULT '0' COMMENT '发布人职位',
-  `publish_time` bigint(13) DEFAULT '0' COMMENT '发布时间',
+  `publish_time` varchar(50) NOT NULL DEFAULT '0' COMMENT '发布时间',
   `created_at` bigint(13) DEFAULT '0' COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COMMENT='boss直聘';
