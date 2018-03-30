@@ -19,6 +19,8 @@ CREATE TABLE `boss` (
   `publish_href` varchar(255) NOT NULL DEFAULT '0' COMMENT '发布人头像',
   `publish_position` varchar(50) NOT NULL DEFAULT '0' COMMENT '发布人职位',
   `publish_time` varchar(50) NOT NULL DEFAULT '0' COMMENT '发布时间',
+  # 公用
+  `boss_type` tinyint(1) NOT NULL DEFAULT '1' COMMENT '类型：1/php 2/web前端 3/java 4/python',
   `created_at` bigint(13) DEFAULT '0' COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COMMENT='boss直聘';

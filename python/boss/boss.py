@@ -22,7 +22,7 @@ for j in range(10):
     http = r'https://www.zhipin.com'
 
     # 解析
-    i = 30*j+1
+    i = 30 * j + 1
     for item in lists:
         # info-primary
         info_primary = item.find('div', class_='job-primary')
@@ -59,18 +59,29 @@ for j in range(10):
         publish_position = (publish_line[1])[0:-5]  # 发布人职位
         publish_time = (info_publish.find('p').text)[3:]  # 发布时间
         created_at = int(time.time())
+        boss_type = 1
+
+        """
+        {'job_name': '中级PHP开发', 'job_href': 'https://www.zhipin.com/job_detail/1418606307.html', 'money_min': 8,
+         'money_max': 13, 'address': '杭州 西湖区 黄龙', 'age': '1年以内', 'certificate': '本科', 'company_name': '浙江校联',
+         'company_href': 'https://www.zhipin.com/gongsi/766208.html', 'trade': '移动互联网',
+         'company_round': '不需要融资', 'scale': '20-99', 'publish_href': 'https://i\.jpg', 'publish_name': '陈秀梅',
+         'publish_position': '人事经理', 'publish_time': '03月27日'}
+         """
 
         # SQL 插入语句
         sql = " insert into boss (`job_name`, `job_href`, `money_min`, `money_max`, `address`, `age`, `certificate`, " \
               "`company_name`, `company_href`, `trade`, `company_round`, `scale`, `publish_href`, `publish_name`, " \
-              "`publish_position`, `publish_time`, `created_at`) values " \
-              "('%s', '%s', '%d', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d')" % \
+              "`publish_position`, `publish_time`, `created_at`, `boss_type`) values " \
+              "('%s', '%s', '%d', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s'," \
+              " '%d', '%d')" % \
               (job_name, job_href, money_min, money_max, address, age, certificate, company_name, company_href, trade,
-               company_round, scale, publish_href, publish_name, publish_position, publish_time, created_at)
+               company_round, scale, publish_href, publish_name, publish_position, publish_time, created_at, boss_type)
         cursor.execute(sql)
         db.commit()
         print("正在存入第%d条 --《%s》-- %s" % (i, company_name, money))
         i += 1
+    # 续一秒
     time.sleep(1)
 # 关闭数据库连接
 db.close()
@@ -78,11 +89,3 @@ end = time.time()
 
 s = end - start
 print("总共花费%.2f秒" % s)
-
-"""
-{'job_name': '中级PHP开发', 'job_href': 'https://www.zhipin.com/job_detail/1418606307.html', 'money_min': 8,
- 'money_max': 13, 'address': '杭州 西湖区 黄龙', 'age': '1年以内', 'certificate': '本科', 'company_name': '浙江校联',
- 'company_href': 'https://www.zhipin.com/gongsi/766208.html', 'trade': '移动互联网',
- 'company_round': '不需要融资', 'scale': '20-99', 'publish_href': 'https://i\.jpg', 'publish_name': '陈秀梅',
- 'publish_position': '人事经理', 'publish_time': '03月27日'}
- """
